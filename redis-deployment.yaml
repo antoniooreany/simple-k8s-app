@@ -1,0 +1,23 @@
+# redis-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment # Имя Deployment
+  labels:
+    app: redis # Метка для связи с Service
+spec:
+  replicas: 1 # Запускаем один экземпляр (под)
+  selector:
+    matchLabels:
+      app: redis # Выбираем поды с этой меткой
+  template:
+    metadata:
+      labels:
+        app: redis # Метка самого пода
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine # Используем легкий образ Redis
+        ports:
+        - containerPort: 6379 # Стандартный порт Redis
+        

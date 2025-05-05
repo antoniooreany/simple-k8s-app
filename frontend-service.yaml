@@ -1,0 +1,16 @@
+# frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80 # Порт, на котором Service слушает внутри кластера
+      targetPort: 80 # Порт контейнера Nginx
+      # nodePort: 30007 # Можно указать конкретный NodePort (в диапазоне 30000-32767)
+      # Если не указать, Kubernetes выберет случайный
+  type: NodePort # Делает сервис доступным снаружи на определенном порту узла
+  

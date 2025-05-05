@@ -1,0 +1,14 @@
+# redis-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service # Имя Service, по которому другие поды будут обращаться к Redis
+spec:
+  selector:
+    app: redis # Направляет трафик на поды с меткой 'app: redis'
+  ports:
+    - protocol: TCP
+      port: 6379 # Порт, на котором Service слушает
+      targetPort: 6379 # Порт, на который Service перенаправляет трафик (порт контейнера Redis)
+  type: ClusterIP # Доступен только внутри кластера (по умолчанию)
+  

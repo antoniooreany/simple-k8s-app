@@ -1,0 +1,14 @@
+# backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 80 # Порт, на котором Service слушает
+      targetPort: 80 # Порт контейнера бэкенда
+  type: ClusterIP
+  

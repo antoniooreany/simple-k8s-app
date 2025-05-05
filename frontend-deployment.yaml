@@ -1,0 +1,25 @@
+# frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: nginx:alpine # Простой образ Nginx
+        ports:
+        - containerPort: 80 # Стандартный порт Nginx
+        # В реальном приложении здесь была бы конфигурация Nginx
+        # для проксирования запросов на backend-service
+        

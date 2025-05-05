@@ -1,0 +1,30 @@
+# backend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        # Замените этот образ на ваш реальный бэкенд-образ
+        # Этот образ просто слушает на порту 80
+        image: kennethreitz/httpbin
+        ports:
+        - containerPort: 80 # Порт, на котором слушает httpbin (или ваш бэкенд)
+        env: # Переменные окружения для подключения к Redis
+          - name: REDIS_HOST
+            value: "redis-service" # Имя сервиса Redis
+          - name: REDIS_PORT
+            value: "6379" # Порт сервиса Redis
+            
